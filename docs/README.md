@@ -6,7 +6,7 @@ footer: MIT Licensed | Copyright © 2021-present razorness
 <Demo :initial-round="2"/>
 <Links/>
 
-A lightweight calendar heatmap Vuejs component built on SVG, inspired by github's contribution calendar graph. With vertical mode, tooltip powered by [Tippy.js](https://github.com/atomiks/tippyjs).
+A lightweight calendar heatmap Vuejs component built on SVG, inspired by github's contribution calendar graph. With tooltip powered by [Tippy.js](https://github.com/atomiks/tippyjs).
 
 ## Installation
 
@@ -204,18 +204,3 @@ This overwrites the `darkMode`option. If you use this option, you have to handle
 ```html:no-line-numbers
 <calendar-heatmap :tooltip-formatter="(v) => v.count" .../>
 ```
-
-### vertical
-
-- Type: `boolean`
-- Details:
-
-  Boolean to switch to vertical mode. false by default.
-
-```html:no-line-numbers
-<calendar-heatmap vertical .../>
-```
-
-#### Example
-
-<Demo orientation="vertical"/>

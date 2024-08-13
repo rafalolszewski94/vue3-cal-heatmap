@@ -1,140 +1,3 @@
-<template>
-  <div :class="{ vch__container: true, 'dark-mode': darkMode }">
-    <svg class="vch__wrapper" ref="svg" :viewBox="viewbox">
-      <g
-        class="vch__months__labels__wrapper"
-        :transform="monthsLabelWrapperTransform"
-      >
-        <text
-          class="vch__month__label"
-          v-for="(month, index) in heatmap.firstFullWeekOfMonths"
-          :key="index"
-          :x="getMonthLabelPosition(month).x"
-          :y="getMonthLabelPosition(month).y"
-        >
-          {{ lo.months[month.value] }}
-        </text>
-      </g>
-
-      <g
-        class="vch__days__labels__wrapper"
-        :transform="daysLabelWrapperTransform"
-        v-if="showWeekdays"
-      >
-        <text
-          class="vch__day__label"
-          :x="vertical ? SQUARE_SIZE : 0"
-          :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 20"
-        >
-          {{ lo.days[1] }}
-        </text>
-        <text
-          class="vch__day__label"
-          :x="vertical ? SQUARE_SIZE * 3 : 0"
-          :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 44"
-        >
-          {{ lo.days[3] }}
-        </text>
-        <text
-          class="vch__day__label"
-          :x="vertical ? SQUARE_SIZE * 5 : 0"
-          :y="vertical ? SQUARE_SIZE - SQUARE_BORDER_SIZE : 69"
-        >
-          {{ lo.days[5] }}
-        </text>
-      </g>
-
-      <g
-        v-if="vertical"
-        class="vch__legend__wrapper"
-        :transform="legendWrapperTransform"
-      >
-        <text :x="SQUARE_SIZE * 1.25" y="8">{{ lo.less }}</text>
-        <rect
-          v-for="(color, index) in curRangeColor"
-          :key="index"
-          :rx="round"
-          :ry="round"
-          :style="{ fill: color }"
-          :width="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-          :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-          :x="SQUARE_SIZE * 1.75"
-          :y="SQUARE_SIZE * (index + 1)"
-        />
-        <text
-          :x="SQUARE_SIZE * 1.25"
-          :y="SQUARE_SIZE * (curRangeColor.length + 2) - SQUARE_BORDER_SIZE"
-        >
-          {{ lo.more }}
-        </text>
-      </g>
-
-      <g
-        class="vch__year__wrapper"
-        :transform="yearWrapperTransform"
-        @mouseover="initTippyLazy"
-      >
-        <g
-          class="vch__month__wrapper"
-          v-for="(week, weekIndex) in heatmap.calendar"
-          :key="weekIndex"
-          :transform="getWeekPosition(weekIndex)"
-        >
-          <template v-for="(day, dayIndex) in week" :key="dayIndex">
-            <rect
-              class="vch__day__square"
-              v-if="day.date < now"
-              :rx="round"
-              :ry="round"
-              :transform="getDayPosition(dayIndex)"
-              :width="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-              :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-              :style="{ fill: curRangeColor[day.colorIndex] }"
-              :data-week-index="weekIndex"
-              :data-day-index="dayIndex"
-              @click="$emit('dayClick', day)"
-            />
-          </template>
-        </g>
-      </g>
-    </svg>
-    <div class="vch__legend" v-if="showLegend">
-      <slot name="legend">
-        <div class="vch__legend-left">
-          <slot name="vch__legend-left"></slot>
-        </div>
-        <div class="vch__legend-right">
-          <slot name="legend-right">
-            <div class="vch__legend">
-              <div>{{ lo.less }}</div>
-              <svg
-                v-if="!vertical"
-                class="vch__external-legend-wrapper"
-                :viewBox="legendViewbox"
-                :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-              >
-                <g class="vch__legend__wrapper">
-                  <rect
-                    v-for="(color, index) in curRangeColor"
-                    :key="index"
-                    :rx="round"
-                    :ry="round"
-                    :style="{ fill: color }"
-                    :width="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-                    :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
-                    :x="SQUARE_SIZE * index"
-                  />
-                </g>
-              </svg>
-              <div>{{ lo.more }}</div>
-            </div>
-          </slot>
-        </div>
-      </slot>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import {
   defineComponent,
@@ -193,10 +56,6 @@ export default /*#__PURE__*/ defineComponent({
     tooltipFormatter: {
       type: Function as PropType<TooltipFormatter>,
     },
-    vertical: {
-      type: Boolean,
-      default: false,
-    },
     noDataText: {
       type: [Boolean, String],
       default: null,
@@ -213,6 +72,14 @@ export default /*#__PURE__*/ defineComponent({
     showWeekdays: {
       type: Boolean,
       default: true,
+    },
+    asDots: {
+      type: Boolean,
+      default: false,
+    },
+    dayClasses: {
+      type: [String, Array] as PropType<string | string[]>,
+      default: "",
     },
   },
   emits: ["dayClick"],
@@ -246,15 +113,14 @@ export default /*#__PURE__*/ defineComponent({
             : Heatmap.DEFAULT_RANGE_COLOR_LIGHT)
       );
 
-    const {
-        values,
-        tooltipUnit,
-        tooltipFormatter,
-        noDataText,
-        max,
-        vertical,
-        locale,
-      } = toRefs(props),
+    const rounding = ref(props.round);
+
+    if (props.asDots) {
+      rounding.value = 20;
+    }
+
+    const { values, tooltipUnit, tooltipFormatter, noDataText, max, locale } =
+        toRefs(props),
       tippyInstances = new Map<HTMLElement, Instance>();
 
     let tippySingleton: CreateSingletonInstance;
@@ -293,31 +159,14 @@ export default /*#__PURE__*/ defineComponent({
     }
 
     function getWeekPosition(index: number) {
-      if (props.vertical) {
-        return `translate(0, ${
-          SQUARE_SIZE * heatmap.value.weekCount - (index + 1) * SQUARE_SIZE
-        })`;
-      }
       return `translate(${index * SQUARE_SIZE}, 0)`;
     }
 
     function getDayPosition(index: number) {
-      if (props.vertical) {
-        return `translate(${index * SQUARE_SIZE}, 0)`;
-      }
       return `translate(0, ${index * SQUARE_SIZE})`;
     }
 
     function getMonthLabelPosition(month: Month) {
-      if (props.vertical) {
-        return {
-          x: 3,
-          y:
-            SQUARE_SIZE * heatmap.value.weekCount -
-            SQUARE_SIZE * month.index -
-            SQUARE_SIZE / 4,
-        };
-      }
       return {
         x: SQUARE_SIZE * (month.index - 1),
         y: SQUARE_SIZE - SQUARE_BORDER_SIZE,
@@ -335,33 +184,13 @@ export default /*#__PURE__*/ defineComponent({
       }
     );
 
-    watch(
-      vertical,
-      (v) => {
-        if (v) {
-          width.value =
-            LEFT_SECTION_WIDTH +
-            SQUARE_SIZE * Heatmap.DAYS_IN_WEEK +
-            RIGHT_SECTION_WIDTH;
-          height.value =
-            TOP_SECTION_HEIGHT +
-            SQUARE_SIZE * heatmap.value.weekCount +
-            SQUARE_BORDER_SIZE;
-          daysLabelWrapperTransform.value = `translate(${LEFT_SECTION_WIDTH}, 0)`;
-          monthsLabelWrapperTransform.value = `translate(0, ${TOP_SECTION_HEIGHT})`;
-        } else {
-          width.value =
-            LEFT_SECTION_WIDTH +
-            SQUARE_SIZE * heatmap.value.weekCount +
-            SQUARE_BORDER_SIZE;
-          height.value =
-            TOP_SECTION_HEIGHT + SQUARE_SIZE * Heatmap.DAYS_IN_WEEK;
-          daysLabelWrapperTransform.value = `translate(0, ${TOP_SECTION_HEIGHT})`;
-          monthsLabelWrapperTransform.value = `translate(${LEFT_SECTION_WIDTH}, 0)`;
-        }
-      },
-      { immediate: true }
-    );
+    width.value =
+      LEFT_SECTION_WIDTH +
+      SQUARE_SIZE * heatmap.value.weekCount +
+      SQUARE_BORDER_SIZE;
+    height.value = TOP_SECTION_HEIGHT + SQUARE_SIZE * Heatmap.DAYS_IN_WEEK;
+    daysLabelWrapperTransform.value = `translate(0, ${TOP_SECTION_HEIGHT})`;
+    monthsLabelWrapperTransform.value = `translate(${LEFT_SECTION_WIDTH}, 0)`;
 
     watch([width, height], ([w, h]) => (viewbox.value = ` 0 0 ${w} ${h}`), {
       immediate: true,
@@ -369,13 +198,9 @@ export default /*#__PURE__*/ defineComponent({
     watch(
       [width, height, rangeColor],
       ([w, h, rc]) => {
-        legendWrapperTransform.value = vertical.value
-          ? `translate(${
-              LEFT_SECTION_WIDTH + SQUARE_SIZE * Heatmap.DAYS_IN_WEEK
-            }, ${TOP_SECTION_HEIGHT})`
-          : `translate(${w - SQUARE_SIZE * rc.length - 30}, ${
-              h - BOTTOM_SECTION_HEIGHT
-            })`;
+        legendWrapperTransform.value = `translate(${
+          w - SQUARE_SIZE * rc.length - 30
+        }, ${h - BOTTOM_SECTION_HEIGHT})`;
       },
       { immediate: true }
     );
@@ -472,10 +297,112 @@ export default /*#__PURE__*/ defineComponent({
       getDayPosition,
       getMonthLabelPosition,
       initTippyLazy,
+      rounding,
+      asDots: props.asDots,
     };
   },
 });
 </script>
+
+<template>
+  <div :class="{ vch__container: true, 'dark-mode': darkMode }">
+    <svg class="vch__wrapper" ref="svg" :viewBox="viewbox">
+      <g
+        class="vch__months__labels__wrapper"
+        :transform="monthsLabelWrapperTransform"
+      >
+        <text
+          class="vch__month__label"
+          v-for="(month, index) in heatmap.firstFullWeekOfMonths"
+          :key="index"
+          :x="getMonthLabelPosition(month).x"
+          :y="getMonthLabelPosition(month).y"
+        >
+          {{ lo.months[month.value] }}
+        </text>
+      </g>
+
+      <g
+        class="vch__days__labels__wrapper"
+        :transform="daysLabelWrapperTransform"
+        v-if="showWeekdays"
+      >
+        <text class="vch__day__label" :x="0" :y="20">
+          {{ lo.days[1] }}
+        </text>
+        <text class="vch__day__label" :x="0" :y="44">
+          {{ lo.days[3] }}
+        </text>
+        <text class="vch__day__label" :x="0" :y="69">
+          {{ lo.days[5] }}
+        </text>
+      </g>
+
+      <g
+        class="vch__year__wrapper"
+        :transform="yearWrapperTransform"
+        @mouseover="initTippyLazy"
+      >
+        <g
+          class="vch__month__wrapper"
+          v-for="(week, weekIndex) in heatmap.calendar"
+          :key="weekIndex"
+          :transform="getWeekPosition(weekIndex)"
+        >
+          <template v-for="(day, dayIndex) in week" :key="dayIndex">
+            <rect
+              class="vch__day__square"
+              :class="dayClasses"
+              v-if="day.date < now"
+              :rx="rounding"
+              :ry="rounding"
+              :transform="getDayPosition(dayIndex)"
+              :width="SQUARE_SIZE - SQUARE_BORDER_SIZE"
+              :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
+              :style="{ fill: curRangeColor[day.colorIndex] }"
+              :data-week-index="weekIndex"
+              :data-day-index="dayIndex"
+              @click="$emit('dayClick', day)"
+            />
+          </template>
+        </g>
+      </g>
+    </svg>
+    <div class="vch__legend" v-if="showLegend">
+      <slot name="legend">
+        <div class="vch__legend-left">
+          <slot name="vch__legend-left"></slot>
+        </div>
+        <div class="vch__legend-right">
+          <slot name="legend-right">
+            <div class="vch__legend">
+              <div>{{ lo.less }}</div>
+              <svg
+                class="vch__external-legend-wrapper"
+                :viewBox="legendViewbox"
+                :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
+              >
+                <g class="vch__legend__wrapper">
+                  <rect
+                    v-for="(color, index) in curRangeColor"
+                    :key="index"
+                    :rx="rounding"
+                    :ry="rounding"
+                    :style="{ fill: color }"
+                    :width="SQUARE_SIZE - SQUARE_BORDER_SIZE"
+                    :height="SQUARE_SIZE - SQUARE_BORDER_SIZE"
+                    :x="SQUARE_SIZE * index"
+                  />
+                </g>
+              </svg>
+              <div>{{ lo.more }}</div>
+            </div>
+          </slot>
+        </div>
+      </slot>
+    </div>
+  </div>
+</template>
 
 <style lang="scss">
 .vch__container {

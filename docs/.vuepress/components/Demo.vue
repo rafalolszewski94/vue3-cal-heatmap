@@ -11,11 +11,10 @@
       :values="data"
       :end-date="endDate"
       :style="{
-        'max-width': orientation === 'vertical' ? '145px' : '675px',
+        'max-width': '675px',
         width: '100%',
       }"
       :round="round"
-      :vertical="orientation === 'vertical'"
       :dark-mode="isDarkMode"
       :range-color="rangeColor"
     />
@@ -31,7 +30,7 @@ export default defineComponent({
   props: {
     initialRound: Number,
     orientation: {
-      type: String as PropType<"vertical" | "horizontal">,
+      type: String as PropType<"horizontal">,
       default: "horizontal",
     },
     withSlider: Boolean,

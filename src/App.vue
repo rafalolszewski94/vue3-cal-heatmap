@@ -10,31 +10,13 @@
       <br />
       <span>Current Unit: {{ picked }}</span
       ><br />
-      <br />
-
-      <input
-        type="radio"
-        id="horizontal"
-        value="horizontal"
-        v-model="orientation"
-      />
-      <label for="one">Horizontal</label>
-      <br />
-      <input
-        type="radio"
-        id="vertical"
-        value="vertical"
-        v-model="orientation"
-      />
-      <label for="two">Vertical</label>
     </div>
     <br />
     <h4>None</h4>
     <calendar-heatmap
       :values="[]"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
-      :vertical="orientation === 'vertical'"
+      :style="{ 'max-width': '675px' }"
       :no-data-text="false"
     />
     <br />
@@ -42,8 +24,7 @@
     <calendar-heatmap
       :values="values"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
-      :vertical="orientation === 'vertical'"
+      :style="{ 'max-width': '675px' }"
       no-data-text="NOTHING"
     />
     <br />
@@ -51,25 +32,23 @@
     <calendar-heatmap
       :values="values"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
+      :style="{ 'max-width': '675px' }"
       :round="2"
-      :vertical="orientation === 'vertical'"
     />
     <br />
     <h4>Some (circles)</h4>
     <calendar-heatmap
       :values="values"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
+      :style="{ 'max-width': '675px' }"
       :round="5"
-      :vertical="orientation === 'vertical'"
     />
     <br />
     <h4>Locale</h4>
     <calendar-heatmap
       :values="values"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
+      :style="{ 'max-width': '675px' }"
       :locale="{
         months: [
           'Jan',
@@ -90,29 +69,26 @@
         less: 'Weniger',
         more: 'Mehr',
       }"
-      :vertical="orientation === 'vertical'"
     />
     <br />
     <h4>Tooltip Unit</h4>
     <calendar-heatmap
       :values="values"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
+      :style="{ 'max-width': '675px' }"
       :tooltip-unit="picked"
-      :vertical="orientation === 'vertical'"
     />
     <br />
     <h4>TooltipFormatter</h4>
     <calendar-heatmap
       :values="values"
       :end-date="endDate"
-      :style="{ 'max-width': orientation === 'vertical' ? '145px' : '675px' }"
+      :style="{ 'max-width': '675px' }"
       :tooltip-formatter="
         (c, u) => (c.count ? c.count / 3600 / 1000 + ' ' + u : 'NÖX')
       "
       no-data-text="NIX"
       :tooltip-unit="picked"
-      :vertical="orientation === 'vertical'"
     />
     <br />
     <h4>No legend</h4>
@@ -130,6 +106,16 @@
       :style="{ 'max-width': '675px' }"
       :show-legend="false"
       :show-weekdays="false"
+    />
+    <br />
+    <h4>As Dots</h4>
+    <calendar-heatmap
+      :values="values"
+      :end-date="endDate"
+      :style="{ 'max-width': '675px' }"
+      :show-legend="false"
+      :show-weekdays="false"
+      :as-dots="true"
     />
   </div>
 </template>
