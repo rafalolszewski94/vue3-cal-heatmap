@@ -114,6 +114,23 @@
       :tooltip-unit="picked"
       :vertical="orientation === 'vertical'"
     />
+    <br />
+    <h4>No legend</h4>
+    <calendar-heatmap
+      :values="values"
+      :end-date="endDate"
+      :style="{ 'max-width': '675px' }"
+      :show-legend="false"
+    />
+    <br />
+    <h4>No weekdays shown</h4>
+    <calendar-heatmap
+      :values="values"
+      :end-date="endDate"
+      :style="{ 'max-width': '675px' }"
+      :show-legend="false"
+      :show-weekdays="false"
+    />
   </div>
 </template>
 

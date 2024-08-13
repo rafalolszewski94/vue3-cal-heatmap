@@ -19,6 +19,7 @@
       <g
         class="vch__days__labels__wrapper"
         :transform="daysLabelWrapperTransform"
+        v-if="showWeekdays"
       >
         <text
           class="vch__day__label"
@@ -97,7 +98,7 @@
         </g>
       </g>
     </svg>
-    <div class="vch__legend">
+    <div class="vch__legend" v-if="showLegend">
       <slot name="legend">
         <div class="vch__legend-left">
           <slot name="vch__legend-left"></slot>
@@ -205,12 +206,22 @@ export default /*#__PURE__*/ defineComponent({
       default: 0,
     },
     darkMode: Boolean,
+    showLegend: {
+      type: Boolean,
+      default: true,
+    },
+    showWeekdays: {
+      type: Boolean,
+      default: true,
+    },
   },
   emits: ["dayClick"],
   setup(props) {
     const SQUARE_BORDER_SIZE = Heatmap.SQUARE_SIZE / 5,
       SQUARE_SIZE = Heatmap.SQUARE_SIZE + SQUARE_BORDER_SIZE,
-      LEFT_SECTION_WIDTH = Math.ceil(Heatmap.SQUARE_SIZE * 2.5),
+      LEFT_SECTION_WIDTH = props.showWeekdays
+        ? Math.ceil(Heatmap.SQUARE_SIZE * 2.5)
+        : 0,
       RIGHT_SECTION_WIDTH = SQUARE_SIZE * 3,
       TOP_SECTION_HEIGHT = Heatmap.SQUARE_SIZE + Heatmap.SQUARE_SIZE / 2,
       BOTTOM_SECTION_HEIGHT = Heatmap.SQUARE_SIZE + Heatmap.SQUARE_SIZE / 2,
@@ -308,7 +319,7 @@ export default /*#__PURE__*/ defineComponent({
         };
       }
       return {
-        x: SQUARE_SIZE * month.index,
+        x: SQUARE_SIZE * (month.index - 1),
         y: SQUARE_SIZE - SQUARE_BORDER_SIZE,
       };
     }
