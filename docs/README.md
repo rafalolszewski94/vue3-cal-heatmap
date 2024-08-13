@@ -1,5 +1,5 @@
 ---
-home: true 
+home: true
 footer: MIT Licensed | Copyright © 2021-present razorness
 ---
 
@@ -61,8 +61,8 @@ export default {
 }
 ```
 
-::: warning 
-  A css file is included when importing the package. You may have to setup your bundler to embed the css in your page.
+::: warning
+A css file is included when importing the package. You may have to setup your bundler to embed the css in your page.
 :::
 
 ## Usage
@@ -111,7 +111,8 @@ export default {
 
 <Demo :initialRound="5"/>
 
-### darkMode 
+### darkMode
+
 - Type: `boolean`
 - Details:
 
@@ -123,6 +124,7 @@ export default {
 ```
 
 #### Example
+
 <Demo dark-mode/>
 
 ### rangeColor
@@ -132,18 +134,16 @@ export default {
 
   Array of strings which represents the colors of the progression.
 
-    - The color at `rangeColor[0]` will always represent the values for a `count: null`
-    - The color at `rangeColor[1]` will always represent the values for a `count: 0`
-    - The others are automatically distributed over the maximum value of count, unless you specify `max` props.
-
-
+  - The color at `rangeColor[0]` will always represent the values for a `count: null`
+  - The color at `rangeColor[1]` will always represent the values for a `count: 0`
+  - The others are automatically distributed over the maximum value of count, unless you specify `max` props.
 
 ```html:no-line-numbers
 <calendar-heatmap :range-color="['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']" .../>
 ```
 
-::: tip 
-  This overwrites the `darkMode`option. If you use this option, you have to handle dark mode yourself by using `rangeColor`.
+::: tip
+This overwrites the `darkMode`option. If you use this option, you have to handle dark mode yourself by using `rangeColor`.
 :::
 
 #### Example
@@ -217,4 +217,5 @@ export default {
 ```
 
 #### Example
+
 <Demo orientation="vertical"/>

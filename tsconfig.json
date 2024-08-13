@@ -12,14 +12,9 @@
     "baseUrl": ".",
     "newLine": "lf",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom"
-    ]
+    "lib": ["esnext", "dom"]
   },
   "include": [
     "src/**/*.ts",

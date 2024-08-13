@@ -1,3 +1,3 @@
-import type { SidebarConfig } from '@vuepress/theme-default';
+import type { SidebarConfig } from "@vuepress/theme-default";
 
 export const sidebar: SidebarConfig = {};
