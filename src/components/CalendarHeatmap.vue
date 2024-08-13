@@ -256,7 +256,7 @@ export default /*#__PURE__*/ defineComponent({
           const tooltip = tooltipOptions(
             heatmap.value.calendar[weekIndex][dayIndex]
           );
-          if (tooltip) {
+          if (tooltip && heatmap.value.calendar[weekIndex][dayIndex].count) {
             const instance = tippyInstances.get(e.target as HTMLElement);
 
             if (instance) {
@@ -436,12 +436,6 @@ svg.vch__wrapper {
   text.vch__day__label,
   .vch__legend__wrapper text {
     fill: #767676;
-  }
-
-  rect.vch__day__square:hover {
-    stroke: #555;
-    stroke-width: 2px;
-    paint-order: stroke;
   }
 
   rect.vch__day__square:focus {
