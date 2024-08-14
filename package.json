@@ -37,28 +37,29 @@
     "preview": "vite preview",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs --clean-cache",
-    "up": "taze major -I"
+    "up": "taze major -I",
+    "release": "npm run build && changeset publish"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/types": "^7.21.3",
+    "@changesets/cli": "^2.27.7",
     "@types/node": "^18.15.3",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vuepress/plugin-register-components": "2.0.0-beta.61",
     "@vuepress/plugin-shiki": "2.0.0-beta.61",
     "sass": "^1.59.3",
     "taze": "^0.9.1",
+    "tippy.js": "^6.3.7",
     "typescript": "^5.0.2",
     "vite": "^4.2.0",
     "vite-plugin-dts": "^2.1.0",
     "vue": "^3.2.47",
     "vue-tsc": "^1.2.0",
-    "vuepress": "2.0.0-beta.61",
-    "tippy.js": "^6.3.7"
+    "vuepress": "2.0.0-beta.61"
   },
   "peerDependencies": {
-    "vue": "^3.2.29",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "vue": "^3.2.29"
   },
   "engines": {
     "node": ">=20",
