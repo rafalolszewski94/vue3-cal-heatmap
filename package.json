@@ -1,5 +1,5 @@
 {
-  "name": "vue3-calendar-heatmap",
+  "name": "vue3-cal-heatmap",
   "version": "2.0.5",
   "description": "A lightweight calendar heatmap Vue 3 component built on SVG, inspired by julienr114's vue-calendar-heatmap ans github's contribution calendar graph",
   "keywords": [
