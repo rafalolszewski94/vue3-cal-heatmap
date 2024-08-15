@@ -12,7 +12,7 @@ export default defineUserConfig({
   lang: "en-US",
   title: "Calendar Heatmap",
   description: "Simple Heatmap Component for Vue 3",
-  base: isPublish ? "/vue3-cal-heatmap/" : "/",
+  base: isPublish ? "/vue3-calendar-heatmap/" : "/",
   bundler: viteBundler({
     viteOptions: {
       resolve: {
