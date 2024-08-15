@@ -20,7 +20,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: "CalendarHeatmap",
-      fileName: (format) => `vue3-calendar-heatmap.${format}.js`,
+      fileName: (format) => `vue3-cal-heatmap.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

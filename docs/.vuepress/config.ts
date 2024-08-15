@@ -1,18 +1,18 @@
-import { defaultTheme, defineUserConfig, viteBundler } from "vuepress";
 import { navbar, sidebar } from "./configs";
 
-import type { DefaultThemeOptions } from "vuepress";
-import PluginRegisterComponents from "@vuepress/plugin-register-components";
 import PluginShiki from "@vuepress/plugin-shiki";
+import { defaultTheme } from "@vuepress/theme-default";
+import { defineUserConfig } from "vuepress";
 import path from "path";
+import { viteBundler } from "@vuepress/bundler-vite";
 
 const isPublish = process.env.IS_PUBLISH === "yes";
 
-export default defineUserConfig<DefaultThemeOptions>({
+export default defineUserConfig({
   lang: "en-US",
   title: "Calendar Heatmap",
   description: "Simple Heatmap Component for Vue 3",
-  base: isPublish ? "/vue3-calendar-heatmap/" : "/",
+  base: isPublish ? "/vue3-cal-heatmap/" : "/",
   bundler: viteBundler({
     viteOptions: {
       resolve: {
@@ -26,10 +26,8 @@ export default defineUserConfig<DefaultThemeOptions>({
     },
   }),
   theme: defaultTheme({
-    colorMode: "light",
-    colorModeSwitch: false,
     logo: "https://vuejs.org/images/logo.png",
-    repo: "razorness/vue3-calendar-heatmap",
+    repo: "rafalolszewski94/vue3-calendar-heatmap",
     docsDir: "docs",
     locales: {
       /**
@@ -57,17 +55,8 @@ export default defineUserConfig<DefaultThemeOptions>({
     },
   }),
   plugins: [
-    PluginRegisterComponents({
-      componentsDir: path.resolve(__dirname, "./components"),
-      components: {
-        CalendarHeatmap: path.resolve(
-          __dirname,
-          "../../src/components/CalendarHeatmap.vue"
-        ),
-      },
-    }),
     PluginShiki({
-      theme: "dark-plus",
+      langs: ["ts", "json", "vue", "md", "bash", "diff"],
     }),
   ],
 });

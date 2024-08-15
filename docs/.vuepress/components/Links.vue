@@ -1,29 +1,19 @@
 <template>
   <div>
-    <a
-      href="https://www.npmjs.com/package/vue3-calendar-heatmap"
-      rel="nofollow"
-    >
+    <a href="https://www.npmjs.com/package/vue3-cal-heatmap" rel="nofollow">
       <img
-        src="https://img.shields.io/npm/v/vue3-calendar-heatmap.svg?style=flat-square"
+        src="https://img.shields.io/npm/v/vue3-cal-heatmap.svg?style=flat-square"
         style="max-width: 100%"
       />
     </a>
-    <a
-      href="https://www.npmjs.com/package/vue3-calendar-heatmap"
-      rel="nofollow"
-    >
+    <a href="https://www.npmjs.com/package/vue3-cal-heatmap" rel="nofollow">
       <img
-        src="https://img.shields.io/npm/dm/vue3-calendar-heatmap?style=flat-square"
-        style="max-width: 100%"
-      />
+      src="https://img.shields.io/npm/dm/vue3-cal-heatmap?style=flat-square"
+      style="max-width: 100%" /
     </a>
-    <a
-      href="https://www.npmjs.com/package/vue3-calendar-heatmap"
-      rel="nofollow"
-    >
+    <a href="https://www.npmjs.com/package/vue3-cal-heatmap" rel="nofollow">
       <img
-        src="https://img.shields.io/bundlephobia/minzip/vue3-calendar-heatmap?label=size&style=flat-square"
+        src="https://img.shields.io/bundlephobia/minzip/vue3-cal-heatmap?label=size&style=flat-square"
         style="max-width: 100%"
       />
     </a>

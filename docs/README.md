@@ -15,7 +15,7 @@ A lightweight calendar heatmap Vuejs component built on SVG, inspired by github'
 
 ```bash:no-line-numbers
 # install in your project
-yarn add vue3-calendar-heatmap tippy.js
+yarn add vue3-cal-heatmap tippy.js
 ```
 
   </CodeGroupItem>
@@ -24,7 +24,7 @@ yarn add vue3-calendar-heatmap tippy.js
 
 ```bash:no-line-numbers
 # install in your project
-npm install -D vue3-calendar-heatmap tippy.js
+npm install -D vue3-cal-heatmap tippy.js
 ```
 
   </CodeGroupItem>
@@ -35,7 +35,7 @@ npm install -D vue3-calendar-heatmap tippy.js
 ### Global install
 
 ```typescript:no-line-numbers
-import VueCalendarHeatmap from 'vue3-calendar-heatmap'
+import VueCalendarHeatmap from 'vue3-cal-heatmap'
 
 app.use(VueCalendarHeatmap)
 ```
@@ -43,7 +43,7 @@ app.use(VueCalendarHeatmap)
 ### Use specific components
 
 ```typescript:no-line-numbers
-import { CalendarHeatmap } from 'vue3-calendar-heatmap'
+import { CalendarHeatmap } from 'vue3-cal-heatmap'
 
 app.component('CalendarHeatmap', CalendarHeatmap)
 ```
@@ -51,7 +51,7 @@ app.component('CalendarHeatmap', CalendarHeatmap)
 ### Use directly in component
 
 ```typescript:no-line-numbers
-import { CalendarHeatmap } from 'vue3-calendar-heatmap'
+import { CalendarHeatmap } from 'vue3-cal-heatmap'
 
 export default {
     components: {
