@@ -13,7 +13,7 @@ by [Tippy.js](https://github.com/atomiks/tippyjs).
 
 ## Documentation
 
-[https://rafalolszewski94.github.io/vue3-calendar-heatmap/](https://rafalolszewski94.github.io/vue3-calendar-heatmap/)
+[https://rafalolszewski94.github.io/vue3-cal-heatmap/](https://rafalolszewski94.github.io/vue3-cal-heatmap/)
 
 ## Examples
 

@@ -27,7 +27,7 @@ export default defineUserConfig({
   }),
   theme: defaultTheme({
     logo: "https://vuejs.org/images/logo.png",
-    repo: "rafalolszewski94/vue3-calendar-heatmap",
+    repo: "rafalolszewski94/vue3-cal-heatmap",
     docsDir: "docs",
     locales: {
       /**

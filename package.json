@@ -24,11 +24,11 @@
     "email": "mensch.meier@live.de",
     "url": "razorness.de"
   },
-  "homepage": "https://razorness.github.io/vue3-calendar-heatmap",
+  "homepage": "https://rafalolszewski94.github.io/vue3-cal-heatmap/",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafalolszewski94/vue3-calendar-heatmap.git"
+    "url": "https://github.com/rafalolszewski94/vue3-cal-heatmap.git"
   },
   "sideEffects": false,
   "scripts": {
