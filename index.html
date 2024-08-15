@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.14" />
+    <style>
+      :root {
+        --c-bg: #fff;
+      }
+
+      html.dark {
+        --c-bg: #22272e;
+      }
+
+      html,
+      body {
+        background-color: var(--c-bg);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem('vuepress-color-scheme')
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+
+      if (userMode === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (userMode === 'dark' || systemDarkMode) {
+        document.documentElement.classList.toggle('dark', true)
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <title>Calendar Heatmap</title><meta name="description" content="Simple Heatmap Component for Vue 3">
+    <link rel="preload" href="/vue3-cal-heatmap/assets/style-CsaAy9x5.css" as="style"><link rel="stylesheet" href="/vue3-cal-heatmap/assets/style-CsaAy9x5.css">
+    <link rel="modulepreload" href="/vue3-cal-heatmap/assets/app-BJKI-cWS.js"><link rel="modulepreload" href="/vue3-cal-heatmap/assets/index.html-Bz1Dehla.js">
+    <link rel="prefetch" href="/vue3-cal-heatmap/assets/index.html-DKCgeMZ4.js" as="script"><link rel="prefetch" href="/vue3-cal-heatmap/assets/getting-started.html-e9QsasHt.js" as="script"><link rel="prefetch" href="/vue3-cal-heatmap/assets/404.html-nx6340wC.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!----></div>
+    <script type="module" src="/vue3-cal-heatmap/assets/app-BJKI-cWS.js" defer></script>
+  </body>
+</html>
