@@ -8,8 +8,9 @@
     </a>
     <a href="https://www.npmjs.com/package/vue3-cal-heatmap" rel="nofollow">
       <img
-      src="https://img.shields.io/npm/dm/vue3-cal-heatmap?style=flat-square"
-      style="max-width: 100%" /
+        src="https://img.shields.io/npm/dm/vue3-cal-heatmap?style=flat-square"
+        style="max-width: 100%"
+      />
     </a>
     <a href="https://www.npmjs.com/package/vue3-cal-heatmap" rel="nofollow">
       <img

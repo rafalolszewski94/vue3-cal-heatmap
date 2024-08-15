@@ -1,40 +1,37 @@
----
-home: true
-footer: MIT Licensed | Copyright © 2021-present razorness
----
+<script setup>
+import Demo from './components/Demo.vue'
+import Links from './components/Links.vue'
+</script>
 
-<Demo :initial-round="2"/>
-<Links/>
+# Vue 3 Calendar Heatmap
+
+<br/>
 
 A lightweight calendar heatmap Vuejs component built on SVG, inspired by github's contribution calendar graph. With tooltip powered by [Tippy.js](https://github.com/atomiks/tippyjs).
 
+<Demo :initial-round="2"/>
+
 ## Installation
 
-<CodeGroup>
-  <CodeGroupItem title="YARN" active>
+::: code-group
 
-```bash:no-line-numbers
+```bash:no-line-numbers [Yarn]
 # install in your project
 yarn add vue3-cal-heatmap tippy.js
 ```
 
-  </CodeGroupItem>
-
-  <CodeGroupItem title="NPM">
-
-```bash:no-line-numbers
+```bash:no-line-numbers [NPM]
 # install in your project
 npm install -D vue3-cal-heatmap tippy.js
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
+:::
 
 ## Import
 
 ### Global install
 
-```typescript:no-line-numbers
+```typescript:no-line-numbers v-pre
 import VueCalendarHeatmap from 'vue3-cal-heatmap'
 
 app.use(VueCalendarHeatmap)
@@ -42,7 +39,7 @@ app.use(VueCalendarHeatmap)
 
 ### Use specific components
 
-```typescript:no-line-numbers
+```typescript:no-line-numbers v-pre
 import { CalendarHeatmap } from 'vue3-cal-heatmap'
 
 app.component('CalendarHeatmap', CalendarHeatmap)
@@ -50,7 +47,7 @@ app.component('CalendarHeatmap', CalendarHeatmap)
 
 ### Use directly in component
 
-```typescript:no-line-numbers
+```typescript:no-line-numbers v-pre
 import { CalendarHeatmap } from 'vue3-cal-heatmap'
 
 export default {
@@ -76,8 +73,8 @@ A css file is included when importing the package. You may have to setup your bu
   Array of objects with `date` and `count` keys. `date` values can be a date parseable string, a millisecond timestamp, or a Date object. `count` value should
   be a number.
 
-```html:no-line-numbers
-<calendar-heatmap :values="[{ date: '2018-9-22', count: 6 }, ...]" .../>
+```vue:no-line-numbers v-pre
+<calendar-heatmap :values="[{ date: '2018-9-22', count: 6 }]" />
 ```
 
 ### endDate
@@ -88,8 +85,8 @@ A css file is included when importing the package. You may have to setup your bu
 
   Can be a date parseable string, a millisecond timestamp, or a Date object. The calendar will start automatically one year before this date.
 
-```html:no-line-numbers
-<calendar-heatmap :end-date="2018-9-22" .../>
+```vue:no-line-numbers v-pre
+<calendar-heatmap :end-date="2018-9-22" />
 ```
 
 ### round
@@ -99,7 +96,7 @@ A css file is included when importing the package. You may have to setup your bu
 
   Number to create rounded corners or cirlces in heatmap. `0` by default.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap :round="0" .../>
 ```
 
@@ -119,13 +116,13 @@ A css file is included when importing the package. You may have to setup your bu
   Boolean to toggle default color range between dark and light mode.
   Toggle page between light and dark mode to see in action.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap dark-mode .../>
 ```
 
 #### Example
 
-<Demo dark-mode/>
+<Demo dark-mode />
 
 ### rangeColor
 
@@ -138,7 +135,7 @@ A css file is included when importing the package. You may have to setup your bu
   - The color at `rangeColor[1]` will always represent the values for a `count: 0`
   - The others are automatically distributed over the maximum value of count, unless you specify `max` props.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap :range-color="['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']" .../>
 ```
 
@@ -157,7 +154,7 @@ This overwrites the `darkMode`option. If you use this option, you have to handle
 
   Any number which should be the max color.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap :max="10" .../>
 ```
 
@@ -168,7 +165,7 @@ This overwrites the `darkMode`option. If you use this option, you have to handle
 
   Tooltip text to display on days without data. null by default (shows no tooltip at all).
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap :no-data-text="no data for this day" .../>
 ```
 
@@ -179,7 +176,7 @@ This overwrites the `darkMode`option. If you use this option, you have to handle
 
   Boolean for enable/disable tooltip on square hover. true by default.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap :tooltip="false" .../>
 ```
 
@@ -190,7 +187,7 @@ This overwrites the `darkMode`option. If you use this option, you have to handle
 
   String representing heatmap's unit of measure. Value is "contributions" by default.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap tooltip-unit="stars" .../>
 ```
 
@@ -201,6 +198,6 @@ This overwrites the `darkMode`option. If you use this option, you have to handle
 
   A method to have full control about tooltip content.
 
-```html:no-line-numbers
+```vue:no-line-numbers v-pre
 <calendar-heatmap :tooltip-formatter="(v) => v.count" .../>
 ```

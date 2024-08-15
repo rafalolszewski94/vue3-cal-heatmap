@@ -23,10 +23,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref, toRef } from "vue";
-import { data } from "@/data";
+import { data } from "../../src/data";
+import CalendarHeatmap from "../../src/components/CalendarHeatmap.vue";
 
 export default defineComponent({
   name: "Demo",
+  components: {
+    CalendarHeatmap,
+  },
   props: {
     initialRound: Number,
     orientation: {
