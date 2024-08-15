@@ -11,6 +11,10 @@
 A lightweight calendar heatmap Vuejs component built on SVG, inspired by github's contribution calendar graph. With tooltip powered
 by [Tippy.js](https://github.com/atomiks/tippyjs).
 
+## Source
+
+This is a continuation of [razorness/vue3-calendar-heatmap](https://github.com/razorness/vue3-calendar-heatmap) since it's owner was inactive for over a year.
+
 ## Documentation
 
 [https://rafalolszewski94.github.io/vue3-cal-heatmap/](https://rafalolszewski94.github.io/vue3-cal-heatmap/)
