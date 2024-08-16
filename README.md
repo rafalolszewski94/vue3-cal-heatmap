@@ -8,7 +8,7 @@
 [![TypeScript](https://img.shields.io/badge/-Typescript-informational?style=flat-square)](https://www.typescriptlang.org/)
 [![vue2](https://img.shields.io/badge/vue-3.x-brightgreen.svg?style=flat-square)](https://vuejs.org/)
 
-A lightweight calendar heatmap Vuejs component built on SVG, inspired by github's contribution calendar graph. With tooltip powered
+A lightweight calendar heatmap Vue 3 component built on SVG, inspired by github's contribution calendar graph. With tooltip powered
 by [Tippy.js](https://github.com/atomiks/tippyjs).
 
 ## Source
