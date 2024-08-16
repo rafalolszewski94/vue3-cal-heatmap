@@ -1,5 +1,11 @@
 # vue3-cal-heatmap
 
+## 2.0.9
+
+### Patch Changes
+
+- 970dd0d: fixed gitlab action
+
 ## 2.0.8
 
 ### Patch Changes
